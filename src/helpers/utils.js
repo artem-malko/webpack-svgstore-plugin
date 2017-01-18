@@ -264,6 +264,18 @@ function _parseFiles(filesMap, options) {
   return data;
 }
 
+/**
+ * [_hash description]
+ * @param  {[type]} buffer [description]
+ * @param  {[type]} name   [description]
+ * @return {[type]}        [description]
+ */
+function _hash(str, hash) {
+  return str.indexOf('[hash]') >= 0
+    ? str.replace('[hash]', hash)
+    : str;
+}
+
 module.exports = {
   log: _log,
   parseFiles: _parseFiles,
@@ -276,5 +288,6 @@ module.exports = {
   defs: _defs,
   symbols: _symbols,
   minify: _minify,
-  createSprite: _createSprite
+  createSprite: _createSprite,
+  hash: _hash
 };

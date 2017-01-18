@@ -19,7 +19,6 @@ const _ = require('lodash');
 const path = require('path');
 const utils = require('./helpers/utils');
 const ConstDependency = require('webpack/lib/dependencies/ConstDependency');
-const async = require('async');
 const fs = require('fs');
 const crypto = require('crypto');
 
@@ -34,7 +33,7 @@ class WebpackSvgStore {
     this.options = _.merge({}, defaults, options);
     this.svgFilesMap = {};
     this.generatedFileName = '';
-  };
+  }
 
   analyzeAst() {
     let self = this;
@@ -93,6 +92,10 @@ class WebpackSvgStore {
       };
 
       callback();
+    });
+
+    compiler.plugin('done', () => {
+      console.log(`Symbols sprite is ready. Filename is: ${this.generatedFileName}`);
     });
   }
 }
